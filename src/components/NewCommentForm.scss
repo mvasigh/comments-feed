@@ -1,0 +1,46 @@
+.NewCommentForm {
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+  position: sticky;
+  top: 0;
+  background: var(--color-background);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+
+  &__name-field,
+  &__comment-field {
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+    font-size: 1rem;
+  }
+
+  &__name-field,
+  &__comment-field {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    background-color: var(--color-background-light);
+    color: var(--color-text);
+  }
+
+  &__label {
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+    display: inline-block;
+  }
+
+  &__comment-field {
+    resize: none;
+  }
+
+  &__comment-button {
+    float: right;
+    border: none;
+    font-size: 1rem;
+    padding: var(--spacing-unit) calc(var(--spacing-unit) * 2);
+    background-color: var(--color-accent);
+    color: var(--color-text-accent);
+
+    &:active {
+      background: var(--color-accent-dark);
+    }
+  }
+}

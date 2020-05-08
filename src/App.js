@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.scss';
+import { CommentsFeed } from 'components';
 
 function App() {
-  return <div className="App">Hello world!</div>;
+  return <CommentsFeed />;
 }
 
 export default App;

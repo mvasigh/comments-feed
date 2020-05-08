@@ -1,9 +1,10 @@
 import React from 'react';
 import { CommentsList, NewCommentForm } from 'components';
+import './CommentsFeed.scss';
 
-function CommentsFeed(props) {
+function CommentsFeed() {
   return (
-    <main>
+    <main className="CommentsFeed">
       <NewCommentForm />
       <CommentsList />
     </main>

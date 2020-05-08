@@ -8,7 +8,8 @@
     "dev:server": "nodemon server",
     "dev": "concurrently --kill-others-on-fail \"npm run dev:server\" \"npm run dev:client\"",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "test:ci": "CI=true npm run test -- --collectCoverage"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
