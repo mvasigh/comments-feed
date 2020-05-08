@@ -31,6 +31,13 @@
     resize: none;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+
   &__comment-button {
     float: right;
     border: none;
@@ -42,5 +49,24 @@
     &:active {
       background: var(--color-accent-dark);
     }
+  }
+
+  &__submit-error {
+    margin: 0;
+    float: left;
+    opacity: 1;
+    animation: fadeOut 1s ease 3s;
+    animation-fill-mode: forwards;
+    color: var(--color-error);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
   }
 }

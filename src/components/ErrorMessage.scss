@@ -1,0 +1,6 @@
+.ErrorMessage {
+  padding-top: calc(var(--spacing-unit) * 2);
+  padding-bottom: calc(var(--spacing-unit) * 2);
+  text-align: center;
+  color: var(--color-error);
+}

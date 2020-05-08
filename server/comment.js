@@ -1,5 +1,8 @@
-class Comment {
+const EventEmitter = require('events');
+
+class Comment extends EventEmitter {
   constructor(dataAccessObject) {
+    super();
     this.dataAccessObject = dataAccessObject;
   }
 
@@ -15,14 +18,19 @@ class Comment {
 
   deleteComments() {
     const sql = 'DELETE FROM comments';
-    return this.dataAccessObject.run(sql);
+    return this.dataAccessObject.run(sql).then((deleteResult) => {
+      this.getComments().then((comments) => this.emit('update', comments));
+      return deleteResult;
+    });
   }
 
   createComment({ name, message }) {
-    return this.dataAccessObject.run('INSERT INTO comments (name, message) VALUES (?, ?)', [
-      name,
-      message,
-    ]);
+    return this.dataAccessObject
+      .run('INSERT INTO comments (name, message) VALUES (?, ?)', [name, message])
+      .then((insertResult) => {
+        this.getComments().then((comments) => this.emit('update', comments));
+        return insertResult;
+      });
   }
 
   getComment(id) {

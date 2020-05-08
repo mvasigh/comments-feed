@@ -2,20 +2,23 @@ import React from 'react';
 import { CommentsListItem } from 'components';
 import './CommentsList.scss';
 
-const _comments = Array(10)
-  .fill(null)
-  .map(() => ({
-    name: 'Mehdi Vasigh',
-    message:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  }));
+function CommentsList({ comments = [] }) {
+  const isEmpty = !comments?.length;
 
-function CommentsList({ comments = _comments }) {
+  const sortedComments = React.useMemo(() => {
+    if (!comments) return comments;
+    return comments.slice().sort((a, b) => new Date(b.created) - new Date(a.created));
+  }, [comments]);
+
   return (
     <section className="CommentsList">
-      {comments.map(({ name, message }, i) => (
-        <CommentsListItem name={name} message={message} key={`comment-${i}`} />
-      ))}
+      {isEmpty ? (
+        <p className="CommentsList__empty">No comments yet. Be the first to leave a comment!</p>
+      ) : (
+        sortedComments.map(({ name, message, created }, i) => (
+          <CommentsListItem key={`comment-${i}`} name={name} message={message} created={created} />
+        ))
+      )}
     </section>
   );
 }

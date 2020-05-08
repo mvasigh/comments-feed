@@ -6,8 +6,9 @@ const initialState = {
   message: '',
 };
 
-function NewCommentForm({ onSubmit = () => {} }) {
+function NewCommentForm({ onSubmit = () => {}, submitError }) {
   const [state, setState] = React.useState(initialState);
+  const [showError, setShowError] = React.useState(Boolean(submitError));
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -24,9 +25,16 @@ function NewCommentForm({ onSubmit = () => {} }) {
     // submit the form if cmd/ctrl + return used on textarea
     if (e.keyCode === 13 && e.metaKey) {
       handleSubmit(e);
-      e.target.blur();
     }
   };
+
+  React.useEffect(() => {
+    if (!submitError) return;
+    // Show error message when one is received, and unmount after 5 seconds
+    setShowError(true);
+    let timeout = setTimeout(() => setShowError(false), 5000);
+    return () => clearTimeout(timeout);
+  }, [submitError]);
 
   return (
     <form data-testid="form-new-comment" onSubmit={handleSubmit} className="NewCommentForm">
@@ -56,9 +64,16 @@ function NewCommentForm({ onSubmit = () => {} }) {
         onChange={handleChange}
         onKeyDown={handleCommentKeyDown}
       />
-      <button data-testid="button-comment-submit" className="NewCommentForm__comment-button">
-        Comment
-      </button>
+      <div className="NewCommentForm__actions">
+        <button data-testid="button-comment-submit" className="NewCommentForm__comment-button">
+          Comment
+        </button>
+        {showError && (
+          <p role="alert" className="NewCommentForm__submit-error">
+            {submitError?.message ?? 'Error occured while submitting comment'}
+          </p>
+        )}
+      </div>
     </form>
   );
 }

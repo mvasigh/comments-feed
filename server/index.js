@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const dataAccessObject = new DataAccessObject('./database.sqlite3');
-const comment = new Comment(dataAccessObject);
+const comment = new Comment(dataAccessObject); // this now extends EventEmitter
 
 comment.createTable().catch((error) => {
   console.log(`Error: ${JSON.stringify(error)}`);
@@ -41,6 +41,21 @@ app.get('/api/getComments', function (request, response) {
 app.delete('/api/deleteComments', function (request, response) {
   comment.deleteComments().then((result) => {
     response.send(result);
+  });
+});
+
+/**
+ * Added a `comments/subscribe` endpoint for long-polling, as it will provide
+ * a better user experience than standard polling, at the expense of keeping
+ * open connections around
+ */
+app.get('/api/comments/subscribe', function (request, response) {
+  /**
+   * This is intentionally naive for the sake of simplicity; this endpoint
+   * should also time connections out in case they are not properly closed
+   */
+  comment.once('update', (comments) => {
+    response.send(comments);
   });
 });
 

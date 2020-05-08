@@ -1,4 +1,4 @@
-export const Api = {
+const Api = {
   call(url, method, body = {}) {
     const data = {
       method,
@@ -27,3 +27,5 @@ export const Api = {
     return this.call(url, 'delete');
   },
 };
+
+export default Api;
