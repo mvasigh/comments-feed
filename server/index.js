@@ -61,10 +61,10 @@ app.get('/api/comments/subscribe', function (request, response) {
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.use(express.static('public'));
+app.use(express.static('build'));
 
 // http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (request, response) {
   const rootDir = __dirname.replace('/server', '');
-  response.sendFile(`${rootDir}/src/index.html`);
+  response.sendFile(`${rootDir}/build/index.html`);
 });

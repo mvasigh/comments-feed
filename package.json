@@ -8,6 +8,7 @@
     "dev:server": "nodemon server",
     "dev": "concurrently --kill-others-on-fail \"npm run dev:server\" \"npm run dev:client\"",
     "build": "react-scripts build",
+    "start": "node server/index.js",
     "test": "react-scripts test",
     "test:ci": "CI=true npm run test -- --collectCoverage"
   },
