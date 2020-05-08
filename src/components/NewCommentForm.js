@@ -49,6 +49,7 @@ function NewCommentForm({ onSubmit = () => {}, submitError }) {
         name="name"
         autoComplete="off"
         required
+        maxLength="100"
         value={state.name}
         onChange={handleChange}
       />
@@ -60,6 +61,7 @@ function NewCommentForm({ onSubmit = () => {}, submitError }) {
         placeholder="What's on your mind?"
         name="message"
         required
+        maxLength="255"
         value={state.message}
         onChange={handleChange}
         onKeyDown={handleCommentKeyDown}

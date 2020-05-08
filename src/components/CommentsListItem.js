@@ -4,9 +4,7 @@ import { parseDatetime } from 'utils/date';
 import './CommentsListItem.scss';
 
 function CommentsListItem({ name, message, created }) {
-  const relativeDate = created
-    ? formatDistanceToNow(parseDatetime(created), { addSuffix: true })
-    : null;
+  const relativeDate = created ? formatDistanceToNow(parseDatetime(created)) : null;
 
   return (
     <article className="CommentsListItem">
