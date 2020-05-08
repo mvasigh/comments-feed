@@ -1,8 +1,13 @@
 import React from 'react';
-import { CommentsFeed } from 'components';
+import { CommentsFeed, Debug } from 'components';
 
 function App() {
-  return <CommentsFeed />;
+  return (
+    <>
+      <CommentsFeed />
+      <Debug />
+    </>
+  );
 }
 
 export default App;
